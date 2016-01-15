@@ -2,9 +2,9 @@
 
 namespace Aacotroneo\Saml2;
 
-use Input;
 use OneLogin_Saml2_Auth;
 use URL;
+use Illuminate\Support\Facades\Input;
 
 /**
  * A simple class that represents the user that 'came' inside the saml2 assertion
@@ -58,6 +58,12 @@ class Saml2User
 
             return $relayState;
         }
+    }
+
+    function getSessionIndex(){
+        $auth = $this->auth;
+
+        return $auth->getSessionIndex();
     }
 
 } 

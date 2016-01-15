@@ -64,7 +64,6 @@ class Saml2Controller extends Controller
         if ($redirectUrl !== null) {
             return Redirect::to($redirectUrl);
         } else {
-
             return Redirect::to(config('saml2_settings.loginRoute')); 
         }
     }
@@ -77,6 +76,7 @@ class Saml2Controller extends Controller
     public function sls()
     {
         $error = $this->saml2Auth->sls();
+
         if (!empty($error)) {
             throw new \Exception("Could not log out");
         }

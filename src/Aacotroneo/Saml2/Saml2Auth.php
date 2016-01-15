@@ -63,7 +63,7 @@ class Saml2Auth
     {
         $auth = $this->auth;
 
-        $auth->logout();
+        $auth->logout(null, [], \Session::get('saml.samlNameId'), \Session::get('saml.samlSessionIndex'));
     }
 
     /**

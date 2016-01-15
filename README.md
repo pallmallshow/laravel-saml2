@@ -84,6 +84,11 @@ Only if you want to know, that will redirect the user to the IDP, and will came 
                 'attributes' => $user->getAttributes(),
                 'assertion' => $user->getRawSamlAssertion()
             ];
+
+            //Add saml var to set logout success
+            \Session::set('saml.samlSessionIndex', $user->getSessionIndex());
+            \Session::set('saml.samlNameId', $user->getUserId());
+
              $laravelUser = //find user by ID or attribute
              //if it does not exist create it and go on  or show an error message
              Auth::login($laravelUser);
@@ -103,6 +108,7 @@ Note that for case 2, you may have to manually save your session to make the log
 
 ```php
         Event::listen('Aacotroneo\Saml2\Events\Saml2LogoutEvent', function ($event) {
+            \Session::forget('saml'); //Remove SAML var used for logout
             Auth::logout();
             Session::save();
         });

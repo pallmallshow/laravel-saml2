@@ -23,7 +23,9 @@ class Saml2ServiceProvider extends ServiceProvider
     public function boot()
     {
         if(config('saml2_settings.useRoutes', false) == true ){
-            include __DIR__ . '/../../routes.php';
+            if (! $this->app->routesAreCached()) {
+                include __DIR__ . '/../../routes.php';
+            }
         }
 
         $this->publishes([
